@@ -127,3 +127,15 @@ build:
 
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
             <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    v2.0 updates
+        - none type task is not valied
+            - backend sollution
+                @app.route("/add", methods=["POST"] )
+                def add():
+                    title = request.form.get("title")
+                    if title: # title not none
+                        new_todo = Todo(title=title, complete=False)
+                        db.session.add(new_todo)
+                        db.session.commit()
+                    return redirect(url_for("index"))

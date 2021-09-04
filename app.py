@@ -25,9 +25,10 @@ def index():
 @app.route("/add", methods=["POST"] )
 def add():
     title = request.form.get("title")
-    new_todo = Todo(title=title, complete=False)
-    db.session.add(new_todo)
-    db.session.commit()
+    if title: # title not none
+        new_todo = Todo(title=title, complete=False)
+        db.session.add(new_todo)
+        db.session.commit()
     return redirect(url_for("index"))
 
 @app.route("/update/<int:todo_id>")
